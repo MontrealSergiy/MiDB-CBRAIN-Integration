@@ -102,7 +102,7 @@
       "cbrain:allow_empty_strings":   [
         "derivatives_prefix"
       ],
-      "cbrain:override-string-input-ruby-regex": {
+      "cbrain:override-input-string-ruby-regex": {
         "derivatives_prefix": ":relative-path:"
       },
       "cbrain:no-run-id-for-outputs": [
