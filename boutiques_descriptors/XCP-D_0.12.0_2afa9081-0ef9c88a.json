@@ -4,7 +4,7 @@
     "tool-version": "0.12.0_2afa9081-0ef9c88a",
     "schema-version": "0.5",
     "url": "https://xcp-d.readthedocs.io/en/latest/index.html",
-    "command-line": "true [SESSION_ID]; true [SUBJECT_DIR]; true [DERIVATIVES_PREFIX]; mkdir -p work; export FS_LICENSE=$PWD/[FS_LICENSE_FILE]; xcp_d [SUBJECT_PREPROC_FMRI_DIR] [OUTPUT_DIR] participant --omp-nthreads 2 [MODE] [COMBINERUNS] [VERBOSE] [INPUT_TYPE] [TASK] [SMOOTHING] [DESPIKE] [LINC_QC] [MIN_TIME] [NUISANCE] --fs-license-file [FS_LICENSE_FILE] [DUMMY_SCANS] [BPF] [LOWER_BPF] [UPPER_BPF] [BPF_ORDER] [MOTION_FILTER_TYPE] [BAND_STOP_MIN] [BAND_STOP_MAX] [MOTION_FILTER_ORDER] [HEAD_RADIUS] [FD_THRESH] [WARP_SURFACES] [BIDS_FILTER] [CREATE_MATRICES] [OUTPUT_LAYOUT] -w work --notrack [REPORT_OUTPUT_LEVEL]",
+    "command-line": "true [SESSION_ID]; true [SUBJECT_DIR]; true [DERIVATIVES_PREFIX]; mkdir -p work; export FS_LICENSE=$PWD/[FS_LICENSE_FILE]; xcp_d [SUBJECT_PREPROC_FMRI_DIR] [OUTPUT_DIR] participant --omp-nthreads 2 [MODE] [COMBINERUNS] [VERBOSE] [INPUT_TYPE] [TASK] [CUSTOM_DS_NAME][CUSTOM_DS_PATH] [ATLASES] [SMOOTHING] [DESPIKE] [LINC_QC] [MIN_TIME] [NUISANCE] --fs-license-file [FS_LICENSE_FILE] [DUMMY_SCANS] [BPF] [LOWER_BPF] [UPPER_BPF] [BPF_ORDER] [MOTION_FILTER_TYPE] [BAND_STOP_MIN] [BAND_STOP_MAX] [MOTION_FILTER_ORDER] [HEAD_RADIUS] [FD_THRESH] [WARP_SURFACES] [BIDS_FILTER] [CREATE_MATRICES] [OUTPUT_LAYOUT] -w work --notrack [REPORT_OUTPUT_LEVEL]",
     "container-image": {
         "image": "pennlinc/xcp_d:0.12.0",
         "index": "docker://",
@@ -353,6 +353,35 @@
             "optional": true,
             "type": "String",
             "value-key": "[DERIVATIVES_PREFIX]"
+        },
+        {
+            "id": "atlases",
+            "name": "Atlases",
+            "description": "Selection of atlases to apply to the data. All of XCP-D’s built-in atlases are used by default.",
+            "type": "String",
+            "value-key": "[ATLASES]",
+            "list": true,
+            "optional": true,
+            "list-separator": " "
+        },
+        {
+            "id": "custom_dataset_path",
+            "name": "Custom dataset",
+            "description": "Additional, custom datasets (e.g. for custom atlas)",
+            "type": "File",
+            "optional": true,
+            "value-key": "[CUSTOM_DS_PATH]",
+            "command-line-flag": "="
+        },
+        {
+            "id": "custom_dataset_name",
+            "name": "Custom dataset name/alias",
+            "description": "Name for an additional, custom datasets (e.g. to be used as a custom atlas).  It is for provenance (and may differ from folder name)",
+            "type": "String",
+            "optional": true,
+            "value-key": "[CUSTOM_DS_NAME]",
+            "default-value": "customdata",
+            "command-line-flag": "-d"
         }
     ],
     "output-files": [
@@ -409,6 +438,15 @@
                 "head_radius",
                 "fd_thresh"
             ]
+        },
+        {
+            "id": "custom_data",
+            "name": "Custom datasets",
+            "members": [
+                "custom_dataset_path",
+                "custom_dataset_name"
+            ],
+            "all-or-none": true
         }
     ],
     "tags": {
