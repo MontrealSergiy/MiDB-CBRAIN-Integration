@@ -363,13 +363,14 @@
             "value-key": "[ATLASES]",
             "list": true,
             "optional": true,
-            "list-separator": " "
+            "list-separator": " ",
+            "command-line-flag": "--atlases"
         },
         {
             "id": "custom_dataset_path",
             "name": "Custom dataset",
             "description": "Additional, custom datasets (e.g. for custom BIDS atlas)",
-            "type": "File",
+            "type": "String",
             "optional": true,
             "value-key": "[CUSTOM_DS_PATH]",
             "command-line-flag": "=",
@@ -382,7 +383,8 @@
             "type": "File",
             "optional": true,
             "value-key": "[CUSTOM_DS_NAME]",
-            "command-line-flag": "-d"
+            "command-line-flag": "-d",
+            "command-line-flag-separator": " "
         }
     ],
     "output-files": [

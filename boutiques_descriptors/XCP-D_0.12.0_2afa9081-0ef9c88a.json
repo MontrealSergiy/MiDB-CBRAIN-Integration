@@ -362,7 +362,8 @@
             "value-key": "[ATLASES]",
             "list": true,
             "optional": true,
-            "list-separator": " "
+            "list-separator": " ",
+            "command-line-flag": "--atlases"
         },
         {
             "id": "custom_dataset_path",
@@ -371,7 +372,8 @@
             "type": "File",
             "optional": true,
             "value-key": "[CUSTOM_DS_PATH]",
-            "command-line-flag": "="
+            "command-line-flag": "=",
+            "command-line-flag-separator": ""
         },
         {
             "id": "custom_dataset_name",
@@ -380,8 +382,8 @@
             "type": "String",
             "optional": true,
             "value-key": "[CUSTOM_DS_NAME]",
-            "default-value": "customdata",
             "command-line-flag": "-d"
+
         }
     ],
     "output-files": [
