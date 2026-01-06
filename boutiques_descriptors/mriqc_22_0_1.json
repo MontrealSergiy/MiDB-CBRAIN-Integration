@@ -33,6 +33,8 @@
             "name": "Session ID",
             "description": "filter input dataset by session id",
             "optional": true,
+            "list" : true,
+            "list-separator": " ",
             "type": "String",
             "value-key": "[SESSION_ID]"
         },
@@ -42,7 +44,9 @@
             "name": "Run ID",
             "description": "filter input dataset by run id (only integer run ids are valid)",
             "optional": true,
-            "type": "Flag",
+            "list" : true,
+            "list-separator": " ",
+            "type": "String",
             "value-key": "[RUN_ID]"
         },
         {
@@ -51,6 +55,8 @@
             "name": "Task ID",
             "description": "filter input dataset by task id",
             "optional": true,
+            "list" : true,
+            "list-separator": " ",
             "type": "String",
             "value-key": "[TASK_ID]"
         },
@@ -60,6 +66,8 @@
             "name": "Modalities",
             "description": "filter input dataset by MRI type",
             "optional": true,
+            "list" : true,
+            "list-separator": " ",
             "type": "String",
             "value-key": "[MODALITIES]"
         },
@@ -180,16 +188,6 @@
             "BoutiquesForcedOutputBrowsePath" : {
               "output_dir": "[DERIVATIVES_PREFIX]mriqc"
             },
-            "BoutiquesTaskLogsCopier": {
-                "stdout":     "[MRIQC_OUTPUT_DIR]/[SUBJECT_DIR]/ses-[SESSION_ID]/.cbrain/stdout.log",
-                "stderr":     "[MRIQC_OUTPUT_DIR]/[SUBJECT_DIR]/ses-[SESSION_ID]/.cbrain/stderr.log",
-                "runtime":    "[MRIQC_OUTPUT_DIR]/[SUBJECT_DIR]/ses-[SESSION_ID]/.cbrain/runtime_info.properties",
-                "descriptor": "[MRIQC_OUTPUT_DIR]/[SUBJECT_DIR]/ses-[SESSION_ID]/.cbrain/boutiques_descriptor.json",
-                "invoke":     "[MRIQC_OUTPUT_DIR]/[SUBJECT_DIR]/ses-[SESSION_ID]/.cbrain/boutiques_invoke.json",
-                "jobscript":  "[MRIQC_OUTPUT_DIR]/[SUBJECT_DIR]/ses-[SESSION_ID]/.cbrain/job_script.sh",
-                "cbrain_params": "[MRIQC_OUTPUT_DIR]/[SUBJECT_DIR]/ses-[SESSION_ID]/.cbrain/cbrain_params.json"
-            },
-            "BoutiquesBidsSubjectFileSelector": { "subject_dir": "all_to_keep" },
             "BoutiquesOutputCacheCleaner": ["output_dir"],
             "BoutiquesBidsSingleSubjectMaker": "subject_dir"
         }
