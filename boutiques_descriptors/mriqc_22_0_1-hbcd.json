@@ -1,7 +1,7 @@
 {
     "name": "MRIQC",
     "description": "MRIQC extracts no-reference IQMs (image quality metrics) from structural (T1w and T2w) and functional MRI (magnetic resonance imaging) data.",
-    "tool-version": "22.0.1-nbcd",
+    "tool-version": "22.0.1-hbcd",
     "schema-version": "0.5",
     "url": "https://mriqc.readthedocs.io/en/stable/",
     "command-line": "true [DERIVATIVES_PREFIX]; mriqc [SUBJECT_DIR] [MRIQC_OUTPUT_DIR] participant --no-sub --n_cpus 1 -w work/[SUBJECT_DIR].mriqc_work [SESSION_ID] [RUN_ID] [TASK_ID] [MODALITIES] [DRY_RUN] [MEM_GB] [FLOAT32] [ICA] [FD_THRESH]",
