@@ -4,7 +4,7 @@
     "tool-version": "24.0.2",
     "schema-version": "0.5",
     "url": "https://mriqc.readthedocs.io/en/stable/",
-    "command-line": "true [DERIVATIVES_PREFIX]; mriqc [SUBJECT_DIR] [MRIQC_OUTPUT_DIR] participant --no-sub --n_cpus 1 -w work/[SUBJECT_DIR].mriqc_work [SESSION_ID] [RUN_ID] [TASK_ID] [MODALITIES] [DRY_RUN] [MEM_GB] [FLOAT32] [ICA] [FD_THRESH]",
+    "command-line": "true [DERIVATIVES_PREFIX]; mriqc [SUBJECT_DIR] [MRIQC_OUTPUT_DIR] participant --no-sub --n_cpus 1 -w work/[SUBJECT_DIR].mriqc_work [SESSION_ID] [RUN_ID] [TASK_ID] [MODALITIES] [DRY_RUN] [MEM_GB] [FLOAT32] [FD_THRESH]",
     "container-image": {
         "image": "nipreps/mriqc:24.0.2",
         "index": "docker://",
@@ -99,15 +99,6 @@
             "optional": true,
             "type": "Flag",
             "value-key": "[FLOAT32]"
-        },
-        {
-            "command-line-flag": "--ica",
-            "id": "ica",
-            "name": "Run ICA",
-            "description": "Run ICA on the raw data and include the componentsin the individual reports (slow but potentially very insightful)",
-            "optional": true,
-            "type": "Flag",
-            "value-key": "[ICA]"
         },
         {
             "command-line-flag": "--fd_thres",
