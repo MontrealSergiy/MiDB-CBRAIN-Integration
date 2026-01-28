@@ -132,7 +132,6 @@
             "name": "Non-standard parameters",
             "members": [
                 "fd_thresh",
-                "ica",
                 "float32",
                 "mem_gb",
                 "dry_run",
