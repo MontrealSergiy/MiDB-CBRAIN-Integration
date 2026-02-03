@@ -4,7 +4,7 @@
     "tool-version": "24.0.2",
     "schema-version": "0.5",
     "url": "https://mriqc.readthedocs.io/en/stable/",
-    "command-line": "true [DERIVATIVES_PREFIX]; mriqc [SUBJECT_DIR] [MRIQC_OUTPUT_DIR] participant --no-sub --n_cpus 1 -w work/[SUBJECT_DIR].mriqc_work [SESSION_ID] [RUN_ID] [TASK_ID] [MODALITIES] [DRY_RUN] [MEM_GB] [FLOAT32] [FD_THRESH]",
+    "command-line": "true [DERIVATIVES_PREFIX]; mriqc [SUBJECT_DIR] [MRIQC_OUTPUT_DIR] participant --no-sub --n_cpus 1 -w work/[SUBJECT_DIR].mriqc_work [SESSION_ID] [RUN_ID] [TASK_ID] [MODALITIES] [VERBOSE_REPORTS] [DRY_RUN] [MEM_GB] [FLOAT32] [FD_THRESH]",
     "container-image": {
         "image": "nipreps/mriqc:24.0.2",
         "index": "docker://",
@@ -72,6 +72,14 @@
             "value-key": "[MODALITIES]"
         },
         {
+            "command-line-flag": "--verbose-reports",
+            "id": "verbose_reports",
+            "name": "Verbose reports",
+            "optional": true,
+            "type": "Flag",
+            "value-key": "[VERBOSE_REPORTS]"
+        },
+        {
             "command-line-flag": "--dry-run",
             "id": "dry_run",
             "name": "Dry Run",
@@ -131,6 +139,7 @@
             "id": "non_standard_params",
             "name": "Non-standard parameters",
             "members": [
+                "verbose_reports",
                 "fd_thresh",
                 "float32",
                 "mem_gb",
