@@ -139,7 +139,7 @@
             "command-line-flag": "-v",
             "id": "verbose",
             "name": "verbose",
-            "description": "Increases log verbosity for each occurence (-vvv).",
+            "description": "Increases log verbosity.",
             "optional": true,
             "type": "Flag",
             "value-key": "[VERBOSE]"
