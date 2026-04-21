@@ -4,7 +4,7 @@
     "tool-version": "24.0.2",
     "schema-version": "0.5",
     "url": "https://mriqc.readthedocs.io/en/stable/",
-    "command-line": "true [DERIVATIVES_PREFIX]; mriqc [SUBJECT_DIR] [MRIQC_OUTPUT_DIR] participant --no-sub --n_cpus 1 -w work/[SUBJECT_DIR].mriqc_work [SESSION_ID] [RUN_ID] [TASK_ID] [MODALITIES] [VERBOSE_REPORTS] [DRY_RUN] [MEM_GB] [FLOAT32] [FD_THRESH]",
+    "command-line": "true [DERIVATIVES_PREFIX]; mriqc [SUBJECT_DIR] [MRIQC_OUTPUT_DIR] participant --no-sub --n_cpus 1 -w work/[SUBJECT_DIR].mriqc_work [BIDS_FILTER_FILE] [SESSION_ID] [RUN_ID] [TASK_ID] [MODALITIES] [VERBOSE_REPORTS] [DRY_RUN] [MEM_GB] [FLOAT32] [FD_THRESH]",
     "container-image": {
         "image": "nipreps/mriqc:24.0.2",
         "index": "docker://",
@@ -26,6 +26,15 @@
             "optional": false,
             "type": "String",
             "value-key": "[MRIQC_OUTPUT_DIR]"
+        },
+        {
+            "command-line-flag": "--bids-filter-file",
+            "description": "A JSON file describing custom BIDS input filters using PyBIDS. For further details, please check out https://fmriprep.readthedocs.io/en/latest/faq.html#how-do-I-select-only-certain-files-to-be-input-to-fMRIPrep",
+            "id": "bids_filter_file",
+            "name": "BIDS Filter File",
+            "optional": true,
+            "type": "File",
+            "value-key": "[BIDS_FILTER_FILE]"
         },
         {
             "command-line-flag": "--session-id",
