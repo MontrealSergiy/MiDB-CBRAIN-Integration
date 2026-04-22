@@ -1,5 +1,5 @@
 {
-    "name": "MRIQC",
+    "name": "MRIQC_MPN",
     "description": "MRIQC extracts no-reference IQMs (image quality metrics) from structural (T1w and T2w) and functional MRI (magnetic resonance imaging) data. With additional features added within MPN project, such as support for T2starw and FLAIR modalities.",
     "author": "The Poldrack lab (original MRIQC), Alex Pastor Bernier (enhancements)",
     "tool-version": "24.2.0",
