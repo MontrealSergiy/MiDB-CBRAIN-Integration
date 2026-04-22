@@ -3,9 +3,7 @@
     "description": "MRIQC extracts no-reference IQMs (image quality metrics) from structural (T1w and T2w) and functional MRI (magnetic resonance imaging) data. With additional features added within MPN project, such as support for T2starw and FLAIR modalities.",
     "tool-version": "24.2.0",
     "schema-version": "0.5",
-
     "command-line": "true [DERIVATIVES_PREFIX]; mriqc [SUBJECT_DIR] [MRIQC_OUTPUT_DIR] participant [BIDS_FILTER_FILE] --no-sub --n_cpus 1 -w work/[SUBJECT_DIR].mriqc_work [SESSION_ID] [RUN_ID] [TASK_ID] [MODALITIES] [VERBOSE_REPORTS] [DRY_RUN] [MEM_GB] [FLOAT32] [FD_THRESH]",
-
     "inputs": [
         {
             "description": "Subject folder for BIDS (folders name should be sub-XXXXX).",
