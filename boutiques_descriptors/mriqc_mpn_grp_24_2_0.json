@@ -1,27 +1,38 @@
 {
-    "name": "MRIQC_MPN",
-    "description": "MRIQC extracts no-reference IQMs (image quality metrics) from structural (T1w and T2w) and functional MRI (magnetic resonance imaging) data. With additional features added within MPN project, such as support for T2starw and FLAIR modalities.",
+    "name": "MRIQC_MPN_group",
+    "description": "MRIQC group analysis only. MRIQC extracts no-reference IQMs (image quality metrics) from structural (T1w and T2w) and functional MRI (magnetic resonance imaging) data. With additional features added within MPN project, such as support for T2starw and FLAIR modalities.",
     "author": "The Poldrack lab (original MRIQC), Alex Pastor Bernier (enhancements)",
     "tool-version": "24.2.0",
     "schema-version": "0.5",
-    "command-line": "true [DERIVATIVES_PREFIX]; mriqc [SUBJECT_DIR] [MRIQC_OUTPUT_DIR] participant [BIDS_FILTER_FILE] --no-sub --n_cpus 1 -w work/[SUBJECT_DIR].mriqc_work [SESSION_ID] [RUN_ID] [TASK_ID] [MODALITIES] [VERBOSE_REPORTS] [DRY_RUN] [MEM_GB] [FLOAT32] [FD_THRESH]",
+    "command-line": "true [DERIVATIVES_PREFIX]; mriqc [SUBJECT_DIR] [MRIQC_OUTPUT_DIR] participant [BIDS_FILTER_FILE] --no-sub --n_cpus 1 -w work/[SUBJECT_DIR].mriqc_work [SESSION_ID] [RUN_ID] [TASK_ID] [MODALITIES]",
     "inputs": [
         {
-            "description": "Subject folder for BIDS (folders name should be sub-XXXXX).",
+            "description": "Subject folders for BIDS (folders name should be sub-XXXXX).",
             "id": "subject_dir",
             "name": "Subject Directory",
             "optional": false,
+            "list": true,
             "type": "File",
             "value-key": "[SUBJECT_DIR]"
         },
         {
-            "description": "The name of the output for the outcomes of preprocessing and visual reports. When processing is ran via CBRAIN only subject-specific files/folders will be saved, so the naming of the output folder will not influence the final naming/destination of files/folders.",
+            "description": "Previous result from MRIQC subjects participant level analysis (folders name should include subj ids).",
+            "id": "subject_prep",
+            "name": "Subject Previous Runs",
+            "optional": false,
+            "list": true,
+            "type": "File",
+            "value-key": "[SUBJECT_DIR]"
+        },
+        {
+            "description": "The name of the output for the outcomes .",
             "id": "mriqc_output_dir",
-            "name": "MRIQC Output Directory",
+            "name": "MRIQC Group Analysis Output Directory",
             "optional": false,
             "type": "String",
             "value-key": "[MRIQC_OUTPUT_DIR]"
         },
+
         {
             "command-line-flag": "--session-id",
             "id": "session_id",
@@ -86,22 +97,13 @@
             "value-key": "[VERBOSE_REPORTS]"
         },
         {
-            "command-line-flag": "--dry-run",
-            "id": "dry_run",
-            "name": "Dry Run",
-            "description": "Do not run the workflow.",
-            "optional": true,
-            "type": "Flag",
-            "value-key": "[DRY_RUN]"
-        },
-        {
             "command-line-flag": "--mem_gb",
             "id": "mem_gb",
-            "name": "Memory (GB) 1-15",
+            "name": "Memory (GB)",
             "description": "available total memory",
             "optional": true,
-            "default-value": 13,
-            "maximum": 15,
+            "default-value": 2,
+            "maximum": 8,
             "type": "Number",
             "value-key": "[MEM_GB]"
         },
@@ -113,15 +115,6 @@
             "optional": true,
             "type": "Flag",
             "value-key": "[FLOAT32]"
-        },
-        {
-            "command-line-flag": "--fd_thres",
-            "id": "fd_thresh",
-            "name": "Framewise Displacement Threshold",
-            "description": "motion threshold for framewise displacement computation",
-            "optional": true,
-            "type": "Number",
-            "value-key": "[FD_THRESH]"
         },
         {
             "default-value": "derivatives/",
@@ -146,10 +139,8 @@
             "name": "Non-standard parameters",
             "members": [
                 "verbose_reports",
-                "fd_thresh",
                 "float32",
                 "mem_gb",
-                "dry_run",
                 "modalities",
                 "task_id",
                 "run_id"
