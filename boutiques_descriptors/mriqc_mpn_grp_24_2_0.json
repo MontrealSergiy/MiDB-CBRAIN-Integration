@@ -4,7 +4,7 @@
     "author": "The Poldrack lab (original MRIQC), Alex Pastor Bernier (enhancements)",
     "tool-version": "24.2.0",
     "schema-version": "0.5",
-    "command-line": "true [DERIVATIVES_PREFIX]; mriqc [SUBJECT_DIR] [MRIQC_OUTPUT_DIR] participant [BIDS_FILTER_FILE] --no-sub --n_cpus 1 -w work/[SUBJECT_DIR].mriqc_work [SESSION_ID] [RUN_ID] [TASK_ID] [MODALITIES]",
+    "command-line": "true [DERIVATIVES_PREFIX]; mriqc [SUBJECT_DIR] [MRIQC_OUTPUT_DIR] [PREVIOUS_RESULTS] group [BIDS_FILTER_FILE] --no-sub --n_cpus 1 -w work/cbrain.mriqc_work [SESSION_ID] [RUN_ID] [TASK_ID] [MODALITIES]",
     "inputs": [
         {
             "description": "Subject folders for BIDS (folders name should be sub-XXXXX).",
@@ -16,13 +16,15 @@
             "value-key": "[SUBJECT_DIR]"
         },
         {
-            "description": "Previous result from MRIQC subjects participant level analysis (folders name should include subj ids).",
-            "id": "subject_prep",
-            "name": "Subject Previous Runs",
+            "command-line-flag": "--goutput_dir",
+            "description": "Previous result from MRIQC subjects participant level analysis (folders name should include subj ids, and include mriqc ).",
+            "id": "previous_results",
+            "name": "MRIQC participant level analysis results",
             "optional": false,
             "list": true,
             "type": "File",
-            "value-key": "[SUBJECT_DIR]"
+            "value-key": "[SESSION_ID]",
+            "value-key": "[PREVIOUS_RESULTS]"
         },
         {
             "description": "The name of the output for the outcomes .",
@@ -77,7 +79,6 @@
             "type": "String",
             "value-key": "[MODALITIES]",
             "value-choices": ["T1w", "T2w", "dwi", "bold", "T2starw", "FLAIR"]
-
         },
         {
             "command-line-flag": "--bids-filter-file",
@@ -87,34 +88,6 @@
             "optional": true,
             "type": "File",
             "value-key": "[BIDS_FILTER_FILE]"
-        },
-        {
-            "command-line-flag": "--verbose-reports",
-            "id": "verbose_reports",
-            "name": "Verbose reports",
-            "optional": true,
-            "type": "Flag",
-            "value-key": "[VERBOSE_REPORTS]"
-        },
-        {
-            "command-line-flag": "--mem_gb",
-            "id": "mem_gb",
-            "name": "Memory (GB)",
-            "description": "available total memory",
-            "optional": true,
-            "default-value": 2,
-            "maximum": 8,
-            "type": "Number",
-            "value-key": "[MEM_GB]"
-        },
-        {
-            "command-line-flag": "--float32",
-            "id": "float32",
-            "name": "Cast to Float32",
-            "description": "Cast the input data to float32 if it is represented in higher precision (saves space and improves perfomance)",
-            "optional": true,
-            "type": "Flag",
-            "value-key": "[FLOAT32]"
         },
         {
             "default-value": "derivatives/",
@@ -138,9 +111,6 @@
             "id": "non_standard_params",
             "name": "Non-standard parameters",
             "members": [
-                "verbose_reports",
-                "float32",
-                "mem_gb",
                 "modalities",
                 "task_id",
                 "run_id"
@@ -160,8 +130,8 @@
     },
     "suggested-resources": {
         "cpu-cores": 1,
-        "ram": 16,
-        "walltime-estimate": 44000
+        "ram": 4,
+        "walltime-estimate": 4400
     },
     "custom": {
         "cbrain:readonly-input-files": true,
@@ -170,7 +140,7 @@
         "cbrain:override-input-string-ruby-regex": {
             "derivatives_prefix": ":relative-path:"
         },
-        "cbrain:no-run-id-for-outputs": [ "output_dir"],
+
         "cbrain:integrator_modules": {
             "BoutiquesFileTypeVerifier": {
                 "subject_dir": [ "BidsSubject" ]
@@ -179,13 +149,17 @@
                 "subject_dir": "^sub-[a-zA-Z0-9_]+$"
             },
             "BoutiquesOutputFileTypeSetter": {
-                "output_dir": "MRIQCOutput"
+                "output_dir": "FileCollection"
             },
             "BoutiquesForcedOutputBrowsePath" : {
               "output_dir": "[DERIVATIVES_PREFIX]mriqc"
             },
             "BoutiquesOutputCacheCleaner": ["output_dir"],
-            "BoutiquesBidsSingleSubjectMaker": "subject_dir"
+            "BoutiquesInputSubdirMaker": {
+                "previous_results": {
+                    "dirname": "[PREVIOUS_RESULTS]"
+                }
+            }
         }
     }
 }
