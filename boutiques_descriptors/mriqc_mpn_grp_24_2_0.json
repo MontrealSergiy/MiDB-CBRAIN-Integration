@@ -4,7 +4,7 @@
     "author": "The Poldrack lab (original MRIQC), Alex Pastor Bernier (enhancements)",
     "tool-version": "24.2.0",
     "schema-version": "0.5",
-    "command-line": "true  derivs: [PREVIOUS_RESULTS] [DERIVATIVES_PREFIX]; mriqc ReconstructedBIDS  [MRIQC_OUTPUT_DIR] --goutput_dir ReconstructedMRIQC group --participant-label [SUBJECT_DIR] [BIDS_FILTER_FILE] --no-sub --n_cpus 1 -w work/cbrain.mriqc_work [SESSION_ID] [RUN_ID] [TASK_ID] [MODALITIES]",
+    "command-line": "true  --participant-label [SUBJECT_DIR] derivs: [PREVIOUS_RESULTS] [DERIVATIVES_PREFIX]; mriqc ReconstructedBIDS  [MRIQC_OUTPUT_DIR] --goutput_dir ReconstructedMRIQC group [BIDS_FILTER_FILE] --no-sub --n_cpus 1 -w work/cbrain.mriqc_work [SESSION_ID] [RUN_ID] [TASK_ID] [MODALITIES]",
     "inputs": [
         {
             "description": "Subject folders for BIDS (folders name should be sub-XXXXX).",
