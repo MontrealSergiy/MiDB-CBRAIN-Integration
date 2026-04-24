@@ -160,7 +160,10 @@
             "BoutiquesOutputCacheCleaner": ["output_dir"],
             "BoutiquesInputSubdirMaker": {
                 "previous_results": {
-                    "dirname": "CBRAIN_DERIVS"
+                    "dirname": "Reconstructed_MRIQC"
+                },
+                "subject_dir": {
+                    "dirname": "Reconstructed_BIDS"
                 }
             }
         }
