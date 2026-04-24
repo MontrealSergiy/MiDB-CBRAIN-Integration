@@ -143,10 +143,13 @@
 
         "cbrain:integrator_modules": {
             "BoutiquesFileTypeVerifier": {
-                "subject_dir": [ "BidsSubject" ]
+                "subject_dir": [ "BidsSubject" ],
+                "previous_results": [ "MRIQCOutput" ],
+                "bids_filter_file": [ "JsonFile" ]
             },
             "BoutiquesFileNameMatcher": {
-                "subject_dir": "^sub-[a-zA-Z0-9_]+$"
+                "subject_dir": "^sub-[a-zA-Z0-9_]+$",
+                "previous_results": "sub-[a-zA-Z0-9_]+"
             },
             "BoutiquesOutputFileTypeSetter": {
                 "output_dir": "FileCollection"
@@ -157,7 +160,7 @@
             "BoutiquesOutputCacheCleaner": ["output_dir"],
             "BoutiquesInputSubdirMaker": {
                 "previous_results": {
-                    "dirname": "[PREVIOUS_RESULTS]"
+                    "dirname": "CBRAIN_DERIVS"
                 }
             }
         }
