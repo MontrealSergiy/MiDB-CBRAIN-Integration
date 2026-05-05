@@ -1,27 +1,27 @@
 {
-    "name": "MRIQC_MPN_group",
+    "name": "MRIQC_MPN_GROUP",
     "description": "MRIQC group analysis only. MRIQC extracts no-reference IQMs (image quality metrics) from structural (T1w and T2w) and functional MRI (magnetic resonance imaging) data. With additional features added within MPN project, such as support for T2starw and FLAIR modalities.",
     "author": "The Poldrack lab (original MRIQC), Alex Pastor Bernier (enhancements)",
     "tool-version": "24.2.0",
     "schema-version": "0.5",
-    "command-line": "true  [SUBJECT_DIR] ; mriqc ${PWD} ${PWD}/.miscfiles/[GOUTPUT_DIR] --goutput ${PWD}/[GOUTPUT_DIR] group [BIDS_FILTER_FILE] --no-sub --n_cpus 1 -w work/cbrain.mriqc_work [SESSION_ID] [RUN_ID] [TASK_ID] [MODALITIES]",
+    "command-line": "true  [DERIVATIVES_PREFIX] [PARTICIPANT_RESULTS]; echo '{\"Name\": \"Example dataset\", \"BIDSVersion\": \"1.0.2\"}' > dataset_description.json; mkdir -p .miscfiles/ds; cp  dataset_description.json .miscfiles/ds;   mriqc ${PWD}/.miscfiles/ds ${PWD} --goutput ${PWD}/[GOUTPUT_DIR] group [BIDS_FILTER_FILE] --no-sub --n_cpus 1 -w .cb_mriqc_work [SESSION_ID] [RUN_ID] [TASK_ID] [MODALITIES]",
     "inputs": [
         {
-            "description": "Output reports of group analysis.",
-            "id": "previous_results",
+            "description": "Output reports group wide.",
+            "id": "group_results",
             "name": "MRIQC Group Analysis Results",
-            "optional": false,
-            "list": true,
+            "optional": false,            
             "type": "String",
             "value-key": "[GOUTPUT_DIR]"
         },
         {
             "description": "Participant level analysis results.",
-            "id": "mriqc_output_dir",
-            "name": "MRIQC Participant Analysis Results. Derivatives only, original data are not used",
+            "id": "participant_results",
+            "name": "MRIQC Participant Analysis Results. Derivatives only.",
             "optional": false,
-            "type": "FILES",
-            "value-key": "[MRIQC_OUTPUT_DIR]"
+            "type": "File",
+	    "list": true,
+            "value-key": "[PARTICIPANT_RESULTS]"
         },
 
         {
@@ -132,13 +132,8 @@
 
         "cbrain:integrator_modules": {
             "BoutiquesFileTypeVerifier": {
-                "subject_dir": [ "BidsSubject" ],
-                "previous_results": [ "MRIQCOutput" ],
-                "bids_filter_file": [ "JsonFile", "SingleFile", "TextFile" ],
-            },
-            "BoutiquesFileNameMatcher": {
-                "subject_dir": "^sub-[a-zA-Z0-9_]+$",
-                "previous_results": "sub-[a-zA-Z0-9_]+"
+                "participant_results": [ "MRIQCOutput" ],
+                "bids_filter_file": [ "JsonFile", "SingleFile", "TextFile" ]
             },
             "BoutiquesOutputFileTypeSetter": {
                 "output_dir": "FileCollection"
@@ -146,7 +141,6 @@
             "BoutiquesForcedOutputBrowsePath" : {
               "output_dir": "[DERIVATIVES_PREFIX]mriqc"
             },
-
             "BoutiquesInputSubdirMaker": {
                 "bids_filter_file": {
                     "dirname": ".miscfiles",
