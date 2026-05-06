@@ -181,7 +181,12 @@
         },
         "cbrain:integrator_modules": {
             "BoutiquesFileTypeVerifier": {
-                "subject_dir": [ "BidsSubject" ]
+                "subject_dir": [ "BidsSubject" ],
+                "bids_filter_file": [
+                    "JsonFile",
+                    "SingleFile",
+                    "TextFile"
+                ]
             },
             "BoutiquesFileNameMatcher": {
                 "subject_dir": "^sub-[a-zA-Z0-9_]+$"
@@ -192,7 +197,11 @@
             "BoutiquesForcedOutputBrowsePath" : {
               "output_dir": "[DERIVATIVES_PREFIX]mriqc"
             },
-            "BoutiquesOutputCacheCleaner": ["output_dir"],
+            "BoutiquesPostProcessingCleaner": [
+                "output_dir",
+                "CbrainBidsSingleSubject"
+            ],
+            "BoutiquesInputCacheCleaner": ["subject_dir"],
             "BoutiquesBidsSingleSubjectMaker": "subject_dir"
         }
     }
