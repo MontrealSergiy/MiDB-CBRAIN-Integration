@@ -108,8 +108,8 @@
         {
             "id": "output_dir",
             "name": "Output Directory",
-            "description": "This is the output containing group reports.",
-            "path-template": "[OUTPUT_DIR]",
+            "description": "This is the output with group level reports.",
+            "path-template": "[GOUTPUT_DIR]",
             "optional": false
         }
     ],
